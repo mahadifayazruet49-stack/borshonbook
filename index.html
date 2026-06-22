@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialConnect - Modern Social Media Platform</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body, div, nav, input, button {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        /* Custom scrollbar hiding for stories */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-zinc-950 text-gray-900 dark:text-gray-100 font-sans min-h-screen">
+
+    <nav class="sticky top-0 z-50 bg-white dark:bg-zinc-900 border-b border-gray-200 dark:border-zinc-800 px-4 py-2 flex items-center justify-between shadow-sm">
+        <div class="flex items-center gap-2 w-1/4">
+            <div class="text-3xl font-black tracking-wider text-[#1877F2] select-none cursor-pointer">
+                <i class="fa-brands fa-facebook"></i>
+            </div>
+            <div class="relative hidden sm:block w-full max-w-xs">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <input type="text" placeholder="Search SocialConnect..." class="w-full pl-9 pr-4 py-2 bg-gray-100 dark:bg-zinc-800 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-[#1877F2]">
+            </div>
+        </div>
+
+        <div class="flex items-center justify-center gap-1 md:gap-4 lg:gap-8 w-2/4 h-full">
+            <button class="flex items-center justify-center h-12 w-16 text-2xl text-[#1877F2] border-b-4 border-[#1877F2] cursor-pointer" title="Home">
+                <i class="fa-solid fa-house"></i>
+            </button>
+            <button class="flex items-center justify-center h-12 w-16 text-2xl text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg cursor-pointer transition-colors" title="Watch">
+                <i class="fa-solid fa-tv"></i>
+            </button>
+            <button class="flex items-center justify-center h-12 w-16 text-2xl text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg cursor-pointer transition-colors" title="Marketplace">
+                <i class="fa-solid fa-shop"></i>
+            </button>
+            <button class="flex items-center justify-center h-12 w-16 text-2xl text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg cursor-pointer transition-colors" title="Groups">
+                <i class="fa-solid fa-users"></i>
+            </button>
+            <button class="flex items-center justify-center h-12 w-16 text-2xl text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg cursor-pointer transition-colors hidden md:flex" title="Gaming">
+                <i class="fa-solid fa-gamepad"></i>
+            </button>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 w-1/4">
+            <button id="themeToggle" class="p-2.5 bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700 cursor-pointer text-yellow-500 dark:text-gray-400" title="Toggle Theme">
+                <i class="fa-solid fa-moon dark:hidden"></i>
+                <i class="fa-solid fa-sun hidden dark:block"></i>
+            </button>
+            <button class="p-2.5 bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700 cursor-pointer hidden sm:inline-block">
+                <i class="fa-brands fa-facebook-messenger"></i>
+            </button>
+            <button class="p-2.5 bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-gray-200 dark:hover:bg-zinc-700 cursor-pointer">
+                <i class="fa-solid fa-bell"></i>
+            </button>
+            <div class="relative group cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Profile" class="w-10 h-10 rounded-full object-cover ring-2 ring-transparent group-hover:ring-gray-300">
+                <div class="absolute right-0 mt-2 w-48 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl shadow-xl py-2 hidden group-hover:block">
+                    <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-zinc-800"><i class="fa-solid fa-user mr-2"></i> My Profile</a>
+                    <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-zinc-800"><i class="fa-solid fa-gear mr-2"></i> Settings</a>
+                    <hr class="border-gray-200 dark:border-zinc-800 my-1">
+                    <a href="#" class="block px-4 py-2 text-sm text-red-500 hover:bg-gray-100 dark:hover:bg-zinc-800"><i class="fa-solid fa-right-from-bracket mr-2"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-4 gap-6 px-4 py-6">
+
+        <aside class="hidden lg:block lg:col-span-1 space-y-2 sticky top-20 self-start max-h-[85vh] overflow-y-auto no-scrollbar">
+            <a href="#" class="flex items-center gap-3 p-2.5 hover:bg-gray-200 dark:hover:bg-zinc-800/60 rounded-xl transition-colors">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" class="w-9 h-9 rounded-full object-cover" alt="">
+                <span class="font-semibold text-sm">Jane Doe</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 p-2.5 hover:bg-gray-200 dark:hover:bg-zinc-800/60 rounded-xl transition-colors">
+                <i class="fa-solid fa-user-group text-xl text-teal-500 w-9 text-center"></i>
+                <span class="font-semibold text-sm">Friends</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 p-2.5 hover:bg-gray-200 dark:hover:bg-zinc-800/60 rounded-xl transition-colors">
+                <i class="fa-solid fa-users text-xl text-[#1877F2] w-9 text-center"></i>
+                <span class="font-semibold text-sm">Groups</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 p-2.5 hover:bg-gray-200 dark:hover:bg-zinc-800/60 rounded-xl transition-colors">
+                <i class="fa-solid fa-store text-xl text-blue-400 w-9 text-center"></i>
+                <span class="font-semibold text-sm">Marketplace</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 p-2.5 hover:bg-gray-200 dark:hover:bg-zinc-800/60 rounded-xl transition-colors">
+                <i class="fa-solid fa-clock-rotate-left text-xl text-indigo-400 w-9 text-center"></i>
+                <span class="font-semibold text-sm">Memories</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 p-2.5 hover:bg-gray-200 dark:hover:bg-zinc-800/60 rounded-xl transition-colors">
+                <i class="fa-solid fa-bookmark text-xl text-purple-500 w-9 text-center"></i>
+                <span class="font-semibold text-sm">Saved</span>
+            </a>
+            
+            <button id="seeMoreBtn" class="w-full flex items-center gap-3 p-2.5 hover:bg-gray-200 dark:hover:bg-zinc-800/60 rounded-xl transition-colors cursor-pointer text-gray-500 dark:text-gray-400">
+                <div class="w-9 text-center bg-gray-200 dark:bg-zinc-800 p-1.5 rounded-full">
+                    <i class="fa-solid fa-chevron-down text-sm"></i>
+                </div>
+                <span class="font-semibold text-sm text-left">See More</span>
+            </button>
+        </aside>
+
+        <main class="col-span-1 lg:col-span-2 space-y-6">
+            
+            <div class="flex gap-2 overflow-x-auto no-scrollbar py-1">
+                <div class="relative min-w-[110px] h-48 rounded-xl overflow-hidden shadow-sm border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 group cursor-pointer shrink-0">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" class="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300" alt="">
+                    <div class="absolute bottom-0 left-0 right-0 bg-white dark:bg-zinc-900 h-16 pt-6 text-center text-xs font-semibold">
+                        Create Story
+                        <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-9 h-9 bg-[#1877F2] rounded-full border-4 border-white dark:border-zinc-900 flex items-center justify-center text-white text-lg">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative min-w-[110px] h-48 rounded-xl overflow-hidden shadow-sm group cursor-pointer shrink-0">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" alt="Story">
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
+                    <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=80&q=80" class="absolute top-3 left-3 w-8 h-8 rounded-full border-2 border-[#1877F2] object-cover" alt="">
+                    <span class="absolute bottom-2 left-2 text-xs font-medium text-white">Alex Johnson</span>
+                </div>
+                <div class="relative min-w-[110px] h-48 rounded-xl overflow-hidden shadow-sm group cursor-pointer shrink-0">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" alt="Story">
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80" class="absolute top-3 left-3 w-8 h-8 rounded-full border-2 border-[#1877F2] object-cover" alt="">
+                    <span class="absolute bottom-2 left-2 text-xs font-medium text-white">Sarah Connor</span>
+                </div>
+                <div class="relative min-w-[110px] h-48 rounded-xl overflow-hidden shadow-sm group cursor-pointer shrink-0">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" alt="Story">
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
+                    <img src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=80&q=80" class="absolute top-3 left-3 w-8 h-8 rounded-full border-2 border-[#1877F2] object-cover" alt="">
+                    <span class="absolute bottom-2 left-2 text-xs font-medium text-white">Michael Scott</span>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl p-4 shadow-sm space-y-3">
+                <div class="flex items-center gap-3">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" class="w-10 h-10 rounded-full object-cover" alt="">
+                    <input type="text" id="postInput" placeholder="What's on your mind, Jane?" class="w-full bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700/80 rounded-full py-2.5 px-4 text-sm focus:outline-none cursor-pointer transition-colors">
+                </div>
+                <hr class="border-gray-200 dark:border-zinc-800">
+                <div class="flex items-center justify-between text-xs sm:text-sm font-semibold text-gray-600 dark:text-gray-400">
+                    <button class="flex items-center justify-center gap-2 py-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-xl flex-1 cursor-pointer transition-colors"><i class="fa-solid fa-video text-red-500 text-lg"></i> Live Video</button>
+                    <button class="flex items-center justify-center gap-2 py-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-xl flex-1 cursor-pointer transition-colors"><i class="fa-solid fa-images text-green-500 text-lg"></i> Photo/Video</button>
+                    <button class="flex items-center justify-center gap-2 py-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-xl flex-1 cursor-pointer transition-colors"><i class="fa-solid fa-face-smile text-yellow-500 text-lg"></i> Feeling/Activity</button>
+                </div>
+                <div id="publishRow" class="hidden flex justify-end pt-1">
+                    <button id="submitPostBtn" class="px-5 py-1.5 bg-[#1877F2] text-white text-sm font-semibold rounded-lg hover:bg-blue-600 transition-colors cursor-pointer">Post</button>
+                </div>
+            </div>
+
+            <div id="postFeed" class="space-y-6">
+                
+                <div class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl shadow-sm overflow-hidden">
+                    <div class="flex items-center justify-between p-4">
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=100&q=80" class="w-10 h-10 rounded-full object-cover" alt="">
+                            <div>
+                                <h4 class="font-bold text-sm hover:underline cursor-pointer">Alex Johnson</h4>
+                                <div class="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+                                    <span>2 hrs ago</span> &middot; <i class="fa-solid fa-earth-americas" title="Public"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 p-2 rounded-full cursor-pointer"><i class="fa-solid fa-ellipsis"></i></button>
+                    </div>
+                    <div class="px-4 pb-3 text-sm">
+                        Catching a stunning sunset on the coast today. Nature never ceases to amaze me! 🌅✨
+                    </div>
+                    <div class="bg-gray-200 dark:bg-zinc-800 aspect-video w-full">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Post Media">
+                    </div>
+                    <div class="flex items-center justify-between px-4 py-2 text-xs text-gray-500 dark:text-gray-400 border-b border-gray-100 dark:border-zinc-800/60">
+                        <div class="flex items-center gap-1">
+                            <span class="bg-[#1877F2] text-white p-1 rounded-full text-[10px]"><i class="fa-solid fa-thumbs-up"></i></span>
+                            <span class="like-count">24</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <span>5 comments</span>
+                            <span>2 shares</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between px-2 py-1 text-xs sm:text-sm font-semibold text-gray-600 dark:text-gray-400">
+                        <button class="like-btn flex items-center justify-center gap-2 py-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg flex-1 cursor-pointer transition-colors">
+                            <i class="fa-regular fa-thumbs-up text-lg"></i> Like
+                        </button>
+                        <button class="comment-btn flex items-center justify-center gap-2 py-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg flex-1 cursor-pointer transition-colors">
+                            <i class="fa-regular fa-comment text-lg"></i> Comment
+                        </button>
+                        <button class="flex items-center justify-center gap-2 py-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg flex-1 cursor-pointer transition-colors">
+                            <i class="fa-regular fa-share-from-square text-lg"></i> Share
+                        </button>
+                    </div>
+                    <div class="comment-section hidden px-4 pb-4 pt-2 border-t border-gray-100 dark:border-zinc-800/50 bg-gray-50/50 dark:bg-zinc-900/50">
+                        <div class="flex items-center gap-2">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=60&q=80" class="w-8 h-8 rounded-full object-cover" alt="">
+                            <input type="text" placeholder="Write a comment..." class="w-full bg-gray-100 dark:bg-zinc-800 px-3 py-1.5 rounded-full text-xs focus:outline-none">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <aside class="hidden lg:block lg:col-span-1 space-y-6 sticky top-20 self-start max-h-[85vh] overflow-y-auto no-scrollbar">
+            
+            <div class="space-y-3">
+                <h5 class="text-gray-500 dark:text-gray-400 font-bold text-sm tracking-wide">Sponsored</h5>
+                <a href="#" class="flex items-center gap-4 group">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=150&q=80" class="w-24 h-24 rounded-xl object-cover border border-gray-200 dark:border-zinc-800" alt="Ad Image">
+                    <div class="space-y-1">
+                        <p class="text-xs font-bold group-hover:underline">Master Advanced Cloud Architectures</p>
+                        <p class="text-[11px] text-gray-400">cloudacademy.com</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="space-y-3">
+                <h5 class="text-gray-500 dark:text-gray-400 font-bold text-sm tracking-wide">Birthdays</h5>
+                <div class="flex items-start gap-3 text-sm">
+                    <i class="fa-solid fa-cake-candles text-xl text-pink-500 mt-0.5"></i>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        <span class="font-bold hover:underline cursor-pointer">Sarah Connor</span> and <span class="font-bold hover:underline cursor-pointer">2 others</span> have birthdays today.
+                    </p>
+                </div>
+            </div>
+
+            <hr class="border-gray-200 dark:border-zinc-800">
+
+            <div class="space-y-2">
+                <div class="flex items-center justify-between text-gray-500 dark:text-gray-400 font-bold text-sm">
+                    <span class="tracking-wide">Contacts</span>
+                    <div class="flex gap-3 text-xs">
+                        <i class="fa-solid fa-video cursor-pointer hover:text-gray-700 dark:hover:text-white"></i>
+                        <i class="fa-solid fa-magnifying-glass cursor-pointer hover:text-gray-700 dark:hover:text-white"></i>
+                        <i class="fa-solid fa-ellipsis cursor-pointer hover:text-gray-700 dark:hover:text-white"></i>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col gap-1">
+                    <div class="flex items-center gap-3 p-2 hover:bg-gray-200 dark:hover:bg-zinc-800/60 rounded-xl cursor-pointer transition-colors relative">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80" class="w-8 h-8 rounded-full object-cover" alt="">
+                            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white dark:border-zinc-900 rounded-full"></span>
+                        </div>
+                        <span class="text-xs font-semibold">Sarah Connor</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2 hover:bg-gray-200 dark:hover:bg-zinc-800/60 rounded-xl cursor-pointer transition-colors relative">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=80&q=80" class="w-8 h-8 rounded-full object-cover" alt="">
+                            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white dark:border-zinc-900 rounded-full"></span>
+                        </div>
+                        <span class="text-xs font-semibold">Michael Scott</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2 hover:bg-gray-200 dark:hover:bg-zinc-800/60 rounded-xl cursor-pointer transition-colors relative">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=80" class="w-8 h-8 rounded-full object-cover" alt="">
+                            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white dark:border-zinc-900 rounded-full"></span>
+                        </div>
+                        <span class="text-xs font-semibold">David Miller</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // 1. LIGHT & DARK MODE THEME TOGGLE
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Retain System/Localstorage preference on initialization
+        if (localStorage.getItem('theme') === 'light') {
+            htmlElement.classList.remove('dark');
+        }
+
+        // 2. INTERACTIVE POST CREATION MANAGEMENT
+        const postInput = document.getElementById('postInput');
+        const publishRow = document.getElementById('publishRow');
+        const submitPostBtn = document.getElementById('submitPostBtn');
+        const postFeed = document.getElementById('postFeed');
+
+        // Display Publish button row dynamically when focusing on the text box
+        postInput.addEventListener('focus', () => {
+            publishRow.classList.remove('hidden');
+        });
+
+        // Form post processing execution logic
+        function handleCreatePost() {
+            const contentText = postInput.value.trim();
+            if (!contentText) return; // Guard clause against empty strings
+
+            // Build structural Node for modern timeline entry object card
+            const newPostCard = document.createElement('div');
+            newPostCard.className = "bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl shadow-sm overflow-hidden animate-fade-in";
+            
+            newPostCard.innerHTML = `
+                <div class="flex items-center justify-between p-4">
+                    <div class="flex items-center gap-3">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" class="w-10 h-10 rounded-full object-cover" alt="">
+                        <div>
+                            <h4 class="font-bold text-sm hover:underline cursor-pointer">Jane Doe</h4>
+                            <div class="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+                                <span>Just now</span> &middot; <i class="fa-solid fa-earth-americas" title="Public"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 p-2 rounded-full cursor-pointer"><i class="fa-solid fa-ellipsis"></i></button>
+                </div>
+                <div class="px-4 pb-4 text-sm whitespace-pre-wrap">${contentText}</div>
+                <div class="flex items-center justify-between px-4 py-2 text-xs text-gray-500 dark:text-gray-400 border-b border-gray-100 dark:border-zinc-800/60">
+                    <div class="flex items-center gap-1">
+                        <span class="bg-[#1877F2] text-white p-1 rounded-full text-[10px]"><i class="fa-solid fa-thumbs-up"></i></span>
+                        <span class="like-count">0</span>
+                    </div>
+                    <div class="flex gap-3">
+                        <span>0 comments</span>
+                        <span>0 shares</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between px-2 py-1 text-xs sm:text-sm font-semibold text-gray-600 dark:text-gray-400">
+                    <button class="like-btn flex items-center justify-center gap-2 py-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg flex-1 cursor-pointer transition-colors">
+                        <i class="fa-regular fa-thumbs-up text-lg"></i> Like
+                    </button>
+                    <button class="comment-btn flex items-center justify-center gap-2 py-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg flex-1 cursor-pointer transition-colors">
+                        <i class="fa-regular fa-comment text-lg"></i> Comment
+                    </button>
+                    <button class="flex items-center justify-center gap-2 py-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg flex-1 cursor-pointer transition-colors">
+                        <i class="fa-regular fa-share-from-square text-lg"></i> Share
+                    </button>
+                </div>
+                <div class="comment-section hidden px-4 pb-4 pt-2 border-t border-gray-100 dark:border-zinc-800/50 bg-gray-50/50 dark:bg-zinc-900/50">
+                    <div class="flex items-center gap-2">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=60&q=80" class="w-8 h-8 rounded-full object-cover" alt="">
+                        <input type="text" placeholder="Write a comment..." class="w-full bg-gray-100 dark:bg-zinc-800 px-3 py-1.5 rounded-full text-xs focus:outline-none">
+                    </div>
+                </div>
+            `;
+
+            // Prepend new post dynamically into viewport feed stack
+            postFeed.insertBefore(newPostCard, postFeed.firstChild);
+            
+            // Clear inputs & close focus view
+            postInput.value = '';
+            publishRow.classList.add('hidden');
+        }
+
+        // Action Triggers for Post Generation
+        submitPostBtn.addEventListener('click', handleCreatePost);
+        postInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleCreatePost();
+            }
+        });
+
+        // 3. EVENT DELEGATION FOR INTERACTIVE ACTIONS (LIKE & COMMENT TOGGLE)
+        postFeed.addEventListener('click', (e) => {
+            // Find closest context button matching target requirements
+            const likeBtn = e.target.closest('.like-btn');
+            const commentBtn = e.target.closest('.comment-btn');
+
+            if (likeBtn) {
+                const card = likeBtn.closest('.bg-white, .dark\\:bg-zinc-900');
+                const counterEl = card.querySelector('.like-count');
+                const heartIcon = likeBtn.querySelector('i');
+                let counter = parseInt(counterEl.textContent);
+
+                if (likeBtn.classList.contains('text-[#1877F2]')) {
+                    // Reverse Toggle: Unlike State
+                    likeBtn.classList.remove('text-[#1877F2]');
+                    heartIcon.className = "fa-regular fa-thumbs-up text-lg";
+                    counterEl.textContent = counter - 1;
+                } else {
+                    // Activate Toggle: Like State
+                    likeBtn.classList.add('text-[#1877F2]');
+                    heartIcon.className = "fa-solid fa-thumbs-up text-lg";
+                    counterEl.textContent = counter + 1;
+                }
+            }
+
+            if (commentBtn) {
+                const card = commentBtn.closest('.bg-white, .dark\\:bg-zinc-900');
+                const commentBox = card.querySelector('.comment-section');
+                commentBox.classList.toggle('hidden');
+                if (!commentBox.classList.contains('hidden')) {
+                    commentBox.querySelector('input').focus();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
